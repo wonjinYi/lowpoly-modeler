@@ -1,5 +1,8 @@
 # Low-Poly Asset Editor
 
+**한국어 | [English](README_EN.md)**<br>
+사용 설명서: **[한국어](USER_GUIDE.md) | [English](USER_GUIDE_EN.md)**
+
 `Who Ordered Some Shade? / 그늘 시키신 분?`에 사용할 로우폴리 GLB 에셋을 브라우저에서 만들고 정리하는 데 초점을 둔 데스크톱 우선 3D 에디터입니다.
 
 Blender를 대체하는 범용 DCC 도구가 아닙니다. Primitive에서 간단한 게임 에셋을 만들거나, Meshy 등으로 생성한 GLB에서 불필요한 부분을 제거하고 게임용 크기·피벗·재질로 정리하는 작업에 맞춥니다.
@@ -36,7 +39,7 @@ npm run dev
 
 표시된 로컬 주소를 브라우저에서 열고 `+ Cube`를 누르면 바로 시작할 수 있습니다.
 
-자세한 사용 흐름은 [사용 설명서](USER_GUIDE.md)를 참고하세요.
+자세한 사용 흐름은 [한국어 사용 설명서](USER_GUIDE.md) 또는 [English User Guide](USER_GUIDE_EN.md)를 참고하세요.
 
 ## 파일 형식
 
@@ -125,7 +128,8 @@ npm run preview -- --mode pages
 
 ## 문서
 
-- [사용 설명서](USER_GUIDE.md) — 실제 에디터 작업 순서와 도구별 안내
+- **README:** 한국어 | [English](README_EN.md)
+- **사용 설명서:** [한국어](USER_GUIDE.md) | [English](USER_GUIDE_EN.md) — 실제 에디터 작업 순서와 도구별 안내
 - [개발 계획 및 완료 체크리스트](codex-development-plan.md)
 - [개발 지시서](codex-development-instruction.md)
 - [Boolean 기술 검증 기록](boolean-technology-spike.md)

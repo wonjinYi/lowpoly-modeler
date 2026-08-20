@@ -1,5 +1,8 @@
 # Low-Poly Asset Editor 사용 설명서
 
+**한국어 | [English](USER_GUIDE_EN.md)**<br>
+README: **[한국어](README.md) | [English](README_EN.md)**
+
 ## 1. 시작하기
 
 에디터를 열면 좌측 Outliner, 중앙 3D Viewport, 우측 Inspector, 하단 Status / Validation 영역이 보입니다.
@@ -172,4 +175,4 @@ Error는 내보내기를 막습니다. Warning은 내용을 확인한 후 계속
 
 이 에디터는 간단한 게임 asset 제작에 집중합니다. Sculpt, Rigging, Animation 편집, Skinning, Cloth/Physics, Shader Node Editor, 정밀 UV 편집/packing, CAD, 자동 retopology는 제공하지 않습니다.
 
-개발·검증 정보는 [README](README.md), [개발 계획](codex-development-plan.md), [성능 예산](performance-budget.md)에서 확인할 수 있습니다.
+개발·검증 정보는 [한국어 README](README.md), [English README](README_EN.md), [개발 계획](codex-development-plan.md), [성능 예산](performance-budget.md)에서 확인할 수 있습니다.

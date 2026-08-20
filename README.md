@@ -34,12 +34,12 @@ npm run dev
 
 ## 파일 형식
 
-| 용도 | 형식 | 설명 |
-|---|---|---|
-| 가져오기 | `.glb` | 편집·정리할 게임 모델 |
-| 작업 저장 | `.shadeasset` | hierarchy, editable mesh, Mirror 상태, palette, texture payload 등을 보존하는 프로젝트 파일 |
-| 게임용 내보내기 | `.glb` | 숨긴 node를 제외하고 검증 후 다운로드하는 최종 에셋 |
-| Texture Paint | 브라우저가 읽을 수 있는 로컬 이미지 | PNG/JPEG/WebP 등을 PNG/sRGB paint payload로 변환 |
+| 용도            | 형식                                | 설명                                                                                        |
+| --------------- | ----------------------------------- | ------------------------------------------------------------------------------------------- |
+| 가져오기        | `.glb`                              | 편집·정리할 게임 모델                                                                       |
+| 작업 저장       | `.shadeasset`                       | hierarchy, editable mesh, Mirror 상태, palette, texture payload 등을 보존하는 프로젝트 파일 |
+| 게임용 내보내기 | `.glb`                              | 숨긴 node를 제외하고 검증 후 다운로드하는 최종 에셋                                         |
+| Texture Paint   | 브라우저가 읽을 수 있는 로컬 이미지 | PNG/JPEG/WebP 등을 PNG/sRGB paint payload로 변환                                            |
 
 `.shadeasset`은 작업 재개용 파일이고, 게임에 넣을 결과물은 `.glb`입니다.
 
@@ -78,6 +78,25 @@ npm run test:e2e
 npm run build
 npm run build:pages
 ```
+
+## GitHub Pages 배포
+
+`.github/workflows/deploy-pages.yml`이 `main` branch push와 수동 실행에 맞춰 GitHub Pages artifact를 만들고 배포합니다. Vite base path는 GitHub Pages가 제공하는 repository path를 사용하므로 project page 경로에서도 asset과 WASM 파일을 올바르게 읽습니다.
+
+처음 한 번만 GitHub 저장소에서 다음을 설정하세요.
+
+1. **Settings → Pages → Build and deployment → Source**를 **GitHub Actions**로 선택합니다.
+2. `main`에 push하거나 **Actions → Deploy GitHub Pages → Run workflow**를 실행합니다.
+3. workflow의 `deploy` job이 완료되면 GitHub가 Pages URL을 표시합니다. 이 저장소의 기본 project-page 주소는 `https://wonjinyi.github.io/lowpoly-modeler/`입니다.
+
+로컬에서 동일한 하위 경로 build를 확인하려면 다음을 실행합니다.
+
+```bash
+npm run build:pages
+npm run preview -- --mode pages
+```
+
+자동 배포는 `main` push에만 실행되며, pull request에서는 [Quality workflow](.github/workflows/quality.yml)가 검사와 Pages build만 수행합니다.
 
 ## 검증 상태
 

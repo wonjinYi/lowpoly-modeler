@@ -4,7 +4,7 @@
 
 Blender를 대체하는 범용 DCC 도구가 아닙니다. Primitive에서 간단한 게임 에셋을 만들거나, Meshy 등으로 생성한 GLB에서 불필요한 부분을 제거하고 게임용 크기·피벗·재질로 정리하는 작업에 맞춥니다.
 
-![Cube를 추가한 기본 편집 화면 — Outliner, Viewport, Inspector, Validation](docs/images/editor-overview.png)
+![기본 편집 작업 흐름 — Cube 추가 후 모델링 도구 확인](docs/images/editor-workflow.gif)
 
 ## 주요 기능
 

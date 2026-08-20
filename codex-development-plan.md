@@ -418,7 +418,7 @@ Phase 0~5 체크리스트와 완료 기준을 모두 충족했다. 이 구현은
 - 루트 `README.md`와 `USER_GUIDE.md`를 작성해 설치·검증 명령, 파일 형식, 권장 workflow, mode별 작업, export validation, 제한 사항을 사용자 관점에서 문서화했다.
 - Inspector의 모든 텍스트 버튼을 대상으로 어두운 배경과 최소 4.5:1 대비를 Chromium에서 확인하는 회귀 테스트를 추가했다.
 
-남은 기능 작업은 없다. 이후 작업은 실제 게임 에셋으로의 사용자 수용 테스트, 고해상도/복잡 import의 별도 성능 baseline, 또는 범위 밖 UV 편집 기능을 위한 새 계획에서 다룬다.
+v1 범위의 기능 작업은 완료했다. 이후 작업은 실제 게임 에셋으로의 사용자 수용 테스트, 고해상도/복잡 import의 별도 성능 baseline, 범위 밖 UV 편집 기능, 또는 아래의 Face Bend 후속 계획에서 다룬다.
 
 ## 8. 2026-08-19 구현 이력
 
@@ -475,3 +475,41 @@ Phase 0~5 체크리스트와 완료 기준을 모두 충족했다. 이 구현은
 - [`boolean-technology-spike.md`](boolean-technology-spike.md)는 `three-bvh-csg`, `manifold-3d`, `@jscad/modeling`의 라이선스/패키지 크기/bridge 범위를 비교한다. `manifold-3d` WASM spike는 closed cube/cylinder와 imported cube GLB에서 세 Boolean 연산을 실행하고, open/non-manifold 입력은 SceneDocument mutation 전에 차단한다.
 
 이 시점의 후속 작업 목록은 이후 Phase 2~5 구현과 최종 검증으로 모두 완료됐다. 현재 상태는 위의 「최종 구현 상태」를 기준으로 한다.
+
+## 9. 후속 개발 계획 — Face Bend / Extrude + Rotate (v1.1 후보)
+
+### 배경과 목표
+
+현재 Face mode는 선택 면의 수치 기반 `Selection transform`과 직선 `Extrude`를 제공하지만, 새 끝면을 축 기준으로 연속 회전시키는 조작은 제공하지 않는다. 따라서 캔디 케인, 갈고리, 식물 줄기처럼 **직선 몸통은 유지하면서 끝부분만 연속적으로 휘는 튜브 형태**를 자연스럽게 만들기 어렵다.
+
+이 Phase의 목표는 선택한 끝면을 반복적으로 밀고 회전해, 끊김 없는 저폴리 곡선을 만드는 `Face Bend` 워크플로를 제공하는 것이다. Spline/노드 기반 모델러 전체를 도입하는 것은 이 Phase의 범위가 아니다.
+
+### 사용자 흐름
+
+1. Face mode에서 닫힌 튜브의 끝면(cap)을 선택한다.
+2. `Face Bend`에서 길이, 회전축, 각도를 정하고 Preview를 확인한다.
+3. 회전 gizmo 또는 수치 입력으로 원하는 각도를 조절하고 Commit한다.
+4. 새로 생성된 끝면은 자동 선택된 상태로 남는다.
+5. 같은 동작을 반복해 갈고리·캔디 케인·굽은 줄기를 만든다.
+
+### 체크리스트
+
+- [ ] P6-001 Face Bend의 geometry 규칙을 설계한다: source cap, 새 tip ring, side face 생성, local frame, 회전 pivot 및 winding/normal 규칙을 문서화한다.
+- [ ] P6-002 기존 `Extrude`가 Commit 뒤 새 tip face를 안정적으로 선택하도록 selection 계약을 보완한다.
+- [ ] P6-003 Face Bend preview transaction을 구현한다. distance, local X/Y/Z bend axis, signed angle, cancel/commit을 지원한다.
+- [ ] P6-004 Face mode에서 선택 끝면에만 표시되는 move/rotate gizmo를 구현한다. drag 한 번은 하나의 preview transaction으로 유지한다.
+- [ ] P6-005 numeric angle 입력과 gizmo 조작이 같은 geometry 연산을 사용하도록 연결한다.
+- [ ] P6-006 연속 Face Bend가 새 tip face를 자동 선택하고, 직전 local frame을 이어 받아 반복 작업할 수 있게 한다.
+- [ ] P6-007 UV, vertex color, normal, tangent, material corner attribute를 새 side face와 tip ring에 보간·복제하는 규칙을 구현한다.
+- [ ] P6-008 과도한 각도, 0 거리, self-intersection 가능성, 비정상 cap, open/non-manifold 입력을 preview 단계에서 안전하게 거부하거나 경고한다.
+- [ ] P6-009 Unit test를 추가한다: 단일 bend bounds, 연속 bend의 face/vertex invariant, attribute 보존, Cancel, Undo/Redo checksum 복원.
+- [ ] P6-010 Chromium E2E를 추가한다: Cylinder cap 선택 → 10~20° 반복 Face Bend → 연속 곡선 확인 → Face Color → GLB export/reopen.
+- [ ] P6-011 Inspector 도움말, README, USER_GUIDE에 직선 Extrude와 Face Bend의 차이 및 캔디 케인 예제를 문서화한다.
+- [ ] P6-012 성능 기준을 추가한다: 12면 tube에서 24회 연속 bend preview/commit이 UI 응답성과 history 예산을 넘지 않는지 측정한다.
+
+### 완료 기준
+
+- [ ] 12면 Cylinder의 cap을 10~20°씩 반복 Face Bend해, 직선 몸통과 연속된 갈고리가 연결된 저폴리 캔디 케인을 만들 수 있다.
+- [ ] 각 단계가 별도 Undo 항목이며, 연속 Undo/Redo가 원본과 최종 mesh checksum을 정확히 복원한다.
+- [ ] Preview/Cancel은 source mesh와 selection을 훼손하지 않고, Commit 뒤에는 새 tip face가 선택돼 있다.
+- [ ] 생성된 결과가 유한 좌표, 유효 face loop, winding, normal, UV/color/tangent 불변조건을 만족하며 GLB 재열기까지 통과한다.

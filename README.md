@@ -4,7 +4,11 @@
 
 Blender를 대체하는 범용 DCC 도구가 아닙니다. Primitive에서 간단한 게임 에셋을 만들거나, Meshy 등으로 생성한 GLB에서 불필요한 부분을 제거하고 게임용 크기·피벗·재질로 정리하는 작업에 맞춥니다.
 
-![연속 작업 흐름 — 원기둥을 추가·변형하고 Face Color로 저폴리 캔디 케인을 완성](docs/images/editor-workflow.gif)
+![연속 작업 흐름 — Primitive, Transform, Face Color로 비대칭 저폴리 분수를 완성](docs/images/editor-workflow.gif)
+
+완성된 모델을 여러 방향에서 확인할 수 있도록, 실제 viewport 카메라를 한 바퀴 돌린 턴테이블도 함께 제공합니다.
+
+![완성된 비대칭 저폴리 분수 360도 회전](docs/images/fountain-turntable.gif)
 
 ## 주요 기능
 

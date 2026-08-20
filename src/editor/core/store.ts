@@ -316,7 +316,9 @@ function documentsMatch(left: SceneDocument, right: SceneDocument): boolean {
 }
 
 function booleanPreviewMatchesNodes(preview: BooleanPreview | null, nodeIds: NodeId[]): boolean {
-  return preview?.subjectNodeId === nodeIds[0] && preview.cutterNodeId === nodeIds[1] && nodeIds.length === 2;
+  return (
+    preview?.subjectNodeId === nodeIds[0] && preview?.cutterNodeId === nodeIds[1] && nodeIds.length === 2
+  );
 }
 
 function meshVertexCount(document: SceneDocument): number {

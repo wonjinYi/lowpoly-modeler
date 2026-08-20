@@ -4,6 +4,8 @@
 
 Blender를 대체하는 범용 DCC 도구가 아닙니다. Primitive에서 간단한 게임 에셋을 만들거나, Meshy 등으로 생성한 GLB에서 불필요한 부분을 제거하고 게임용 크기·피벗·재질로 정리하는 작업에 맞춥니다.
 
+![Cube를 추가한 기본 편집 화면 — Outliner, Viewport, Inspector, Validation](docs/images/editor-overview.png)
+
 ## 주요 기능
 
 - Cube, Plane, Cylinder, Cone, Sphere, Icosphere 생성
@@ -61,6 +63,8 @@ npm run dev
 3. topology 도구와 Face Color / Material로 형태와 색을 수정합니다.
 4. 크기, 방향, Ground, Pivot을 게임 기준에 맞춥니다.
 5. 검증 경고를 확인한 뒤 GLB를 내보냅니다.
+
+![Bend와 Mirror를 포함한 Inspector 모델링 도구](docs/images/modeling-tools.png)
 
 ## 개발 명령
 

@@ -11,17 +11,19 @@
 
 작업 중인 상태를 남기려면 `Save Project`로 `.shadeasset`을 저장합니다. 게임에 넣을 파일은 `Export GLB`로 만듭니다.
 
+![에디터 기본 화면: Outliner, Viewport, Inspector](docs/images/editor-overview.png)
+
 ## 2. 기본 조작
 
-| 작업 | 방법 |
-|---|---|
-| Object 선택 | Viewport에서 클릭 또는 Outliner에서 선택 |
-| 다중 선택 | `Shift`를 누른 채 클릭 |
-| 영역 선택 | Vertex / Edge / Face mode에서 `Shift`를 누른 채 viewport를 드래그 |
-| 이동 / 회전 / 크기 | 상단 Transform 도구 또는 Inspector 수치 입력 |
-| Undo | `Ctrl/Cmd + Z` |
-| Redo | `Ctrl/Cmd + Shift + Z` 또는 `Ctrl/Cmd + Y` |
-| 선택 삭제 | `Delete` 또는 `Backspace` |
+| 작업               | 방법                                                              |
+| ------------------ | ----------------------------------------------------------------- |
+| Object 선택        | Viewport에서 클릭 또는 Outliner에서 선택                          |
+| 다중 선택          | `Shift`를 누른 채 클릭                                            |
+| 영역 선택          | Vertex / Edge / Face mode에서 `Shift`를 누른 채 viewport를 드래그 |
+| 이동 / 회전 / 크기 | 상단 Transform 도구 또는 Inspector 수치 입력                      |
+| Undo               | `Ctrl/Cmd + Z`                                                    |
+| Redo               | `Ctrl/Cmd + Shift + Z` 또는 `Ctrl/Cmd + Y`                        |
+| 선택 삭제          | `Delete` 또는 `Backspace`                                         |
 
 수치 입력은 값을 적고 `Enter`를 누르거나 다른 곳을 클릭하면 적용됩니다. `Esc`는 입력 중인 값을 되돌립니다.
 
@@ -112,6 +114,8 @@ Boolean은 Face Delete와 달리 실제 volume을 깎거나 합칩니다.
 - Preview 중에는 source geometry가 바뀌지 않습니다. Commit은 하나의 Undo 작업입니다.
 - Boolean 결과는 triangle mesh이며 source subject의 첫 material을 사용합니다. 정교한 다중 재질/UV 재투영은 이 버전의 범위 밖입니다.
 
+![Bend와 Mirror 도구가 있는 Inspector 영역](docs/images/modeling-tools.png)
+
 ## 7. 파일 저장과 내보내기
 
 ### GLB 열기
@@ -137,14 +141,14 @@ Error는 내보내기를 막습니다. Warning은 내용을 확인한 후 계속
 
 ## 8. 문제 해결
 
-| 증상 | 확인할 사항 |
-|---|---|
-| Size가 바뀌지 않음 | 선택 object의 local size/scale 축이 0인지 확인하고 먼저 0이 아닌 값으로 복구합니다. |
-| Loop Cut이 거부됨 | triangle, pole, UV/material seam, boundary/non-manifold 구간일 수 있습니다. Tris to Quads 또는 다른 편집 도구를 사용합니다. |
-| Boolean preview가 실패함 | 두 mesh가 closed manifold인지, Live Mirror가 꺼져 있는지, cutter에 child가 없는지 확인합니다. |
-| Texture Paint를 쓸 수 없음 | UV를 만들거나 기존 UV가 있는 mesh를 선택하고 blank/imported texture를 준비합니다. |
-| Export가 막힘 | 하단 Game Asset Check의 Error 항목을 수정합니다. Warning은 게임 의도에 맞는지 확인한 뒤 export할 수 있습니다. |
-| 작업을 잃을까 걱정됨 | GLB export 전후와 큰 작업 전에 `.shadeasset`으로 저장합니다. |
+| 증상                       | 확인할 사항                                                                                                                 |
+| -------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| Size가 바뀌지 않음         | 선택 object의 local size/scale 축이 0인지 확인하고 먼저 0이 아닌 값으로 복구합니다.                                         |
+| Loop Cut이 거부됨          | triangle, pole, UV/material seam, boundary/non-manifold 구간일 수 있습니다. Tris to Quads 또는 다른 편집 도구를 사용합니다. |
+| Boolean preview가 실패함   | 두 mesh가 closed manifold인지, Live Mirror가 꺼져 있는지, cutter에 child가 없는지 확인합니다.                               |
+| Texture Paint를 쓸 수 없음 | UV를 만들거나 기존 UV가 있는 mesh를 선택하고 blank/imported texture를 준비합니다.                                           |
+| Export가 막힘              | 하단 Game Asset Check의 Error 항목을 수정합니다. Warning은 게임 의도에 맞는지 확인한 뒤 export할 수 있습니다.               |
+| 작업을 잃을까 걱정됨       | GLB export 전후와 큰 작업 전에 `.shadeasset`으로 저장합니다.                                                                |
 
 ## 9. 현재 범위 밖 기능
 

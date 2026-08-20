@@ -13,6 +13,10 @@
 
 ![에디터 기본 화면: Outliner, Viewport, Inspector](docs/images/editor-overview.png)
 
+아래는 Primitive 추가, Transform, Face Color만으로 비대칭 저폴리 분수를 만드는 실제 작업 예시입니다. 설명서의 개별 기능을 읽기 전 전체 흐름을 먼저 확인할 수 있습니다.
+
+![Primitive와 Face Color로 비대칭 저폴리 분수를 만드는 연속 작업 예시](docs/images/editor-workflow.gif)
+
 ## 2. 기본 조작
 
 | 작업               | 방법                                                              |
@@ -26,6 +30,10 @@
 | 선택 삭제          | `Delete` 또는 `Backspace`                                         |
 
 수치 입력은 값을 적고 `Enter`를 누르거나 다른 곳을 클릭하면 적용됩니다. `Esc`는 입력 중인 값을 되돌립니다.
+
+아래처럼 Object mode에서 선택한 primitive의 위치, 회전, Scale을 오른쪽 Inspector에서 바로 확인·수정할 수 있습니다. Gizmo는 viewport에서 빠르게 움직일 때, 수치 입력은 정확한 배치가 필요할 때 사용하세요.
+
+![Object mode에서 Cylinder의 Position, Rotation, Scale을 수치로 조절하는 화면](docs/images/object-transform.png)
 
 ## 3. Mode별 작업
 
@@ -49,6 +57,10 @@ GLB는 triangle mesh로 저장되므로, imported triangle pair는 먼저 `Tris 
 
 Face를 선택해 Delete, Flip Normal, Extrude, Inset을 수행합니다. Face Delete는 열린 구멍을 만드는 가장 직접적인 방법입니다.
 
+Face를 하나 선택하면 오른쪽에 Extrude와 Inset 입력이 나타납니다. 먼저 `Preview`로 결과를 확인하고, 맞으면 Commit하여 하나의 Undo 작업으로 저장하세요.
+
+![Face mode에서 원기둥의 윗면을 선택하고 Extrude와 Inset 도구를 확인하는 화면](docs/images/face-extrude.png)
+
 ### Pivot
 
 Pivot group을 생성하고 위치·이름을 바꿀 수 있습니다. `shade_pivot`은 게임에서 회전시킬 부분의 권장 이름입니다.
@@ -58,6 +70,10 @@ Pivot group을 생성하고 위치·이름을 바꿀 수 있습니다. `shade_pi
 ### Face Color
 
 Viewport에서 face를 클릭해 색칠하거나, 선택된 face에 palette / color picker의 색을 적용합니다. 색은 vertex/corner color로 저장하므로 face 수만큼 material이 늘어나지 않습니다.
+
+면 목록에서 정확한 면을 고른 뒤 palette 또는 color picker로 색을 정하고 `Apply face color`를 누릅니다. 이 화면처럼 같은 Icosphere에 여러 색을 섞어도 material은 하나로 유지됩니다.
+
+![Face Color mode에서 Icosphere의 선택 면을 산호색과 청록색으로 칠하는 화면](docs/images/face-color.png)
 
 ### Texture Paint
 
@@ -84,6 +100,10 @@ Inspector의 `Size W/H/D`는 Object Scale 숫자가 아니라 vertex geometry �
 - Ground panel의 `Move selection to ground`는 선택한 object/subtree의 바닥을 ground reference에 맞춥니다.
 - `Set Ground Reference`로 현재 선택한 바닥 높이를 기준값으로 저장할 수 있습니다.
 - Shadow Preview는 ground, directional light, cast/receive shadow로 silhouette을 확인하는 보기 모드입니다.
+
+Inspector의 Bend와 Mirror는 선택 object의 비파괴 preview를 제공합니다. preview가 맞을 때만 Apply/Bake하여 실제 geometry로 확정하세요.
+
+![Bend와 Mirror 도구가 있는 Inspector 영역](docs/images/modeling-tools.png)
 
 ## 5. Material과 Cleanup
 
@@ -113,8 +133,6 @@ Boolean은 Face Delete와 달리 실제 volume을 깎거나 합칩니다.
 - cutter에는 child object가 있으면 안 됩니다. Commit 시 cutter object가 제거됩니다.
 - Preview 중에는 source geometry가 바뀌지 않습니다. Commit은 하나의 Undo 작업입니다.
 - Boolean 결과는 triangle mesh이며 source subject의 첫 material을 사용합니다. 정교한 다중 재질/UV 재투영은 이 버전의 범위 밖입니다.
-
-![Bend와 Mirror 도구가 있는 Inspector 영역](docs/images/modeling-tools.png)
 
 ## 7. 파일 저장과 내보내기
 
